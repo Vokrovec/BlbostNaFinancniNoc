@@ -4,6 +4,7 @@ from classes import *
 
 @app.route("/", methods=["GET", "POST"])
 def home():
+    load("save.txt")
     if not "marketID" in session:
         return render_template("home.html")
     elif request.method == "GET":
@@ -13,10 +14,11 @@ def home():
             session["userID"] = request.form["userID"]
         except TypeError:
             print("Zadej cislo")
-        return redirect(url_for("home"))
+        return redirect(url_for("market"))
 
 @app.route("/market", methods=["GET", "POST"])
 def market():
+    load("save.txt")
     if request.method == "GET" and "marketID" in session:
         market = Market.all_markets[session["marketID"]]
         return render_template("market.html", market=market)
