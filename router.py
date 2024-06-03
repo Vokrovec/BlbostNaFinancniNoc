@@ -22,7 +22,7 @@ def market():
     if request.method == "GET" and "marketID" in session:
         market = Market.all_markets[session["marketID"]]
         usr = Trader.all_traders[session["userID"]]
-        table = make_table(market, usr)
+        table = make_table(market, usr) #dělá tabulku, která pak může být zobrazena
         return render_template("market.html", market=market, table=table, usr=usr)
     elif request.method == "POST":
         try:
@@ -46,15 +46,14 @@ def make_table(market, user):
 def buy():
     market = Market.all_markets[session["marketID"]]
     usr = Trader.all_traders[session["userID"]]
-    #table = make_table(market, usr)
     for stockAction, amount in request.form.items():
-        if not amount: continue
+        if not amount: continue #if form is empty
         amount = int(amount)
         short, action = stockAction.split("/")
         if action == "buy":
-            market.trade(usr.code, short, amount)
+            market.trade(usr.code, short, amount) #buys a stock
         else:
-            market.trade(usr.code, short, -amount)
+            market.trade(usr.code, short, -amount)#sells a stock
     save("save.txt")
     return redirect(url_for("home"))
 
