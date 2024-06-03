@@ -46,9 +46,9 @@ def make_table(market, user):
 def buy():
     market = Market.all_markets[session["marketID"]]
     usr = Trader.all_traders[session["userID"]]
-    table = make_table(market, usr)
+    #table = make_table(market, usr)
     for stockAction, amount in request.form.items():
-        if not amount: break
+        if not amount: continue
         amount = int(amount)
         short, action = stockAction.split("/")
         if action == "buy":
