@@ -11,7 +11,7 @@ def home():
         return render_template("login.html")
     elif request.method == "POST":
         try:
-            session["userID"] = request.form["userID"]
+            session["userID"] = int(request.form["userID"])
         except TypeError:
             print("Zadej cislo")
         return redirect(url_for("market"))
@@ -21,8 +21,9 @@ def market():
     load("save.txt")
     if request.method == "GET" and "marketID" in session:
         market = Market.all_markets[session["marketID"]]
-        stocks = get_stocks()
-        return render_template("market.html", market=market, stocks=stocks)
+        usr = Trader.all_traders[session["userID"]]
+        table = make_table(market, usr)
+        return render_template("market.html", market=market, table=table, usr=usr)
     elif request.method == "POST":
         try:
             marketID = int(request.form["marketID"])
@@ -32,5 +33,19 @@ def market():
         session["marketID"] = marketID
     return redirect(url_for("home"))
 
-def get_stocks():
-    return Stock.all_stocks.keys()
+def make_table(market, user):
+    table = []
+    for stock in Stock.all_stocks.values():
+        amount = user.stocks[stock.short]
+        price = market.stocks[stock.short][2]
+        max_buy = user.money // price
+        table.append([stock.name, stock.short, amount, price, max_buy])
+    return table
+
+@app.route("/buy", methods=["POST"])
+def buy():
+    market = Market.all_markets[session["marketID"]]
+    usr = Trader.all_traders[session["userID"]]
+    table = make_table(market, usr) 
+    return redirect(url_for("home"))
+

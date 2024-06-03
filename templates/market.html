@@ -6,26 +6,33 @@
     </head>
     <body>
         <h1>{{market.name}}</h1>
-        <table>
-            <tr>
-                <th>Název firmy</th>
-                <th>Ticker</th>
-                <th>Vlastníš</th>
-                <th>Cena</th>
-                <th>Maximální nákup</th>
-                <th colspan="2">Nákup / Prodej</th>
-            </tr>
-        {% for stock in stocks %}
-            <tr>
-                <td>[stockName]</td>
-                <td>{{stock}}</td>
-                <td>[owned]</td>
-                <td>{{market.stocks[stock][2]}}</td>
-                <td>[maxbuy]</td>
-                <td>[buy_čudlítko]</td>
-                <td>[sell_čudlítko]</td>
-            </tr>
-        {% endfor %}
-        </table>
+        <h3>{{usr.name}}</h3>
+        <h3>{{usr.money}}</h3>
+        <form action="buy" method="POST">
+            <table>
+                <tr>
+                    <th>Název firmy</th>
+                    <th>Ticker</th>
+                    <th>Vlastníš</th>
+                    <th>Cena</th>
+                    <th>Maximální nákup</th>
+                    <th>Nákup</th>
+                    <th>Prodej</th>
+                </tr>
+            {% for t in  table %}
+                <tr>
+                    <td>{{t[0]}}</td>
+                    <td>{{t[1]}}</td>
+                    <td>{{t[2]}}</td>
+                    <td>{{t[3]}}</td>
+                    <td>{{t[4]}}</td>
+                    <td><input type="text" id="{{stock}}/buy" name="{{stock}}/buy"></td>
+                    <td><input type="text" id="{{stock}}/sell" name="{{stock}}/sell"></td>
+                </tr>
+            {% endfor %}
+            </table>
+            <button>submit</button>
+        </form>
+        
     </body>
 </html>
