@@ -1,15 +1,31 @@
 <!DOCTYPE html>
 <html>
-    <h1>{{market.name}}</h1>
-    <table>
-        <th>Název firmy</th>
-        <th>Ticker symbol</th>
-        <th>Vlastníš</th>
-        <th>Max buy</th>
-        <th></th>
-        <th></th>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="[styl].css">
+    </head>
+    <body>
+        <h1>{{market.name}}</h1>
+        <table>
+            <tr>
+                <th>Název firmy</th>
+                <th>Ticker</th>
+                <th>Vlastníš</th>
+                <th>Cena</th>
+                <th>Maximální nákup</th>
+                <th colspan="2">Nákup / Prodej</th>
+            </tr>
         {% for stock in stocks %}
-        <tr></tr>
+            <tr>
+                <td>[stockName]</td>
+                <td>{{stock}}</td>
+                <td>[owned]</td>
+                <td>{{market.stocks[stock][2]}}</td>
+                <td>[maxbuy]</td>
+                <td>[buy_čudlítko]</td>
+                <td>[sell_čudlítko]</td>
+            </tr>
         {% endfor %}
-    </table>
+        </table>
+    </body>
 </html>

@@ -21,7 +21,8 @@ def market():
     load("save.txt")
     if request.method == "GET" and "marketID" in session:
         market = Market.all_markets[session["marketID"]]
-        return render_template("market.html", market=market)
+        stocks = get_stocks()
+        return render_template("market.html", market=market, stocks=stocks)
     elif request.method == "POST":
         try:
             marketID = int(request.form["marketID"])
@@ -30,3 +31,6 @@ def market():
             return redirect(url_for("home"))
         session["marketID"] = marketID
     return redirect(url_for("home"))
+
+def get_stocks():
+    return Stock.all_stocks.keys()
