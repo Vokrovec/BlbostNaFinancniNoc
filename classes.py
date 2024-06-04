@@ -1,6 +1,5 @@
 from random import uniform
 
-
 class GameException(Exception):
     pass
 

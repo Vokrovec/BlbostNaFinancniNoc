@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <html>
+    {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for msg in messages %}
+                    <h4>{{msg}}</h4>
+                {% endfor %}
+            {% endif%}
+        {% endwith %}
     <h1>Zadej svůj kód</h1>
     <form method="POST">
-        <input type="text" id="userID" name="userID">
+        <input type="password" id="userID" name="userID">
         <button type="submit">Přihlásit</button>
     </form>
 </html>

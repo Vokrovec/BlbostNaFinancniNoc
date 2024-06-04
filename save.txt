@@ -3,10 +3,10 @@ Stock('Amogus Inc', 'SUS', 250, 0.1, 1, True)
 Stock('Holeček Semiconductors', 'HOL', 500, 0.03, 1, True)
 
 Traders[3]:
-Trader('dr. Pepek', 69, 5000000, {'SUS': 0, 'HOL': 0})
-Trader('námořník', 420, 2000, {'SUS': 0, 'HOL': 0})
+Trader('dr. Pepek', 69, 1950000, {'SUS': 10000, 'HOL': 1100})
+Trader('námořník', 420, 500, {'SUS': 0, 'HOL': 3})
 Trader('Franta', 123, 100000, {'SUS': 0, 'HOL': 0})
 
 Markets[2]:
-Market('Market0', 123456, {'SUS': [10000, 1, 250], 'HOL': [10000, 1, 500]})
+Market('Market0', 123456, {'SUS': [0, 1, 250], 'HOL': [8897, 1, 500]})
 Market('Market1', 234567, {'SUS': [10000, 1, 250], 'HOL': [10000, 1, 500]})

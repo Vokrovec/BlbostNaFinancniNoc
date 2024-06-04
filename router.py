@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for, session
+from flask import render_template, request, redirect, url_for, session, flash
 from app import app
 from classes import *
 
@@ -54,6 +54,11 @@ def buy():
             market.trade(usr.code, short, amount) #buys a stock
         else:
             market.trade(usr.code, short, -amount)#sells a stock
+    session.pop("userID", None)
     save("save.txt")
     return redirect(url_for("home"))
 
+@app.errorhandler(Exception)
+def error_site(e):
+    flash(str(e))
+    return redirect(url_for("home"))
